@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_photo_editor/routes/route.dart';
+import 'package:flutter_photo_editor/controllers/ImageController.dart';
 import 'package:flutter_photo_editor/services/models/image.dart';
 import 'package:get/get.dart';
 
 class DetailPopup extends StatelessWidget {
   final ImageModel data;
+  final controller = Get.put(ImageController());
 
   DetailPopup(this.data);
 
@@ -26,18 +26,18 @@ class DetailPopup extends StatelessWidget {
                   File(data.path),
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    return Center(child: Icon(Icons.error));
+                    return const Center(child: Icon(Icons.error));
                   },
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
       actions: <Widget>[
         TextButton(
-          child: Text('Close'),
+          child: const Text('Close'),
           onPressed: () {
             Navigator.of(context).pop();
           },

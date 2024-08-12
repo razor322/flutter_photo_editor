@@ -5,8 +5,6 @@ import 'package:flutter_photo_editor/utils/db.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:permission_handler/permission_handler.dart';
-
 class ImageController2 extends GetxController {
   var images = <ImageModel>[].obs;
   final ImagePicker _picker = ImagePicker();
@@ -19,6 +17,7 @@ class ImageController2 extends GetxController {
 
   void loadImages() async {
     images.value = await DBService.db.getImages();
+    update();
   }
 
   Future<void> pickAndEditImage() async {

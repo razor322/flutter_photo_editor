@@ -1,18 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_photo_editor/components/detail_popup.dart';
+import 'package:flutter_photo_editor/config/app_const.dart';
 import 'package:flutter_photo_editor/controllers/ImageController.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 
-class HomeScreens extends StatefulWidget {
+class HomeScreens extends StatelessWidget {
   HomeScreens({super.key});
 
-  @override
-  State<HomeScreens> createState() => _HomeScreensState();
-}
-
-class _HomeScreensState extends State<HomeScreens> {
   final ImageController imageViewModel = Get.put(ImageController());
 
   @override
@@ -22,7 +19,7 @@ class _HomeScreensState extends State<HomeScreens> {
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
           title: const Text(
-            'Image Picker Example',
+            AppConst.TITLE_MAIN_PAGE,
             style: TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
           ),
@@ -41,10 +38,6 @@ class _HomeScreensState extends State<HomeScreens> {
   Widget _BuildContent() {
     return Column(
       children: [
-        // ElevatedButton(
-        //   onPressed: () => imageViewModel.getImages(),
-        //   child: const Text('Pick Image'),
-        // ),
         Expanded(
           child: Obx(() {
             if (imageViewModel.images.isEmpty) {
@@ -54,14 +47,16 @@ class _HomeScreensState extends State<HomeScreens> {
                 itemCount: imageViewModel.images.length,
                 itemBuilder: (context, index) {
                   final image = imageViewModel.images[index];
+
                   return ListTile(
                     onTap: () {
                       showDialog(
                           context: context,
                           builder: (context) => DetailPopup(image));
                     },
-                    leading:
-                        Image.file(File(image.path), width: 50, height: 50),
+                    leading: InstaImageViewer(
+                        child: Image.file(File(image.path),
+                            width: 50, height: 50)),
                     title: Text(image.path.split('/').last),
                     trailing: IconButton(
                       icon: const Icon(
