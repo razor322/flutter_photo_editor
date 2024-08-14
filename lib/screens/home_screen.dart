@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 300, height: 300)
                 : Image.file(image!, width: 300, height: 300),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           ElevatedButton(onPressed: () {}, child: Text("SAVE"))

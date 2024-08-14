@@ -6,4 +6,5 @@ class AppConst {
   static const String MESSAGE_FAILED = "Failed edit image";
 
   static const String TITLE_MAIN_PAGE = "Gallery";
+  static const String TITLE_SECOND_PAGE = "Stiker";
 }

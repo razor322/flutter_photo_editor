@@ -150,6 +150,16 @@ class ImageController extends GetxController {
     images.assignAll(imgList);
   }
 
+  editsImages(XFile imageData) async {
+    final imageBytes = await imageData.readAsBytes();
+
+    var editedImage = await Get.to(() => ImageEditor(
+          image: imageBytes,
+        ));
+
+    await saveImage(File(editedImage.path));
+  }
+
   //  saveImage(Uint8List imageBytes) async {
   //   final directory = await getApplicationDocumentsDirectory();
   //   final path = directory.path;

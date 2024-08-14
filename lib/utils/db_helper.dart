@@ -52,4 +52,15 @@ class DatabaseHelper {
     final db = await database;
     return await db.delete('images', where: 'id = ?', whereArgs: [id]);
   }
+
+  Future<int> updateImagePath(int imageId, String newPath) async {
+    final db = await database;
+
+    return await db.update(
+      'images',
+      {'path': newPath},
+      where: 'id = ?',
+      whereArgs: [imageId],
+    );
+  }
 }
